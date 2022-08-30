@@ -246,23 +246,20 @@ class App {
         // Save coordinates
         this.model.coords = [latitude, longitude];
 
-        window.addEventListener("load", () => {
-          // Render Map
-          this.view.renderMap(this.model.coords);
+        // Render Map
+        this.view.renderMap(this.model.coords);
 
-          // Show all meetings marker
-          this.view.renderMarkers(this.model.meetings);
-        });
+        // Show all meetings marker
+        this.view.renderMarkers(this.model.meetings);
       },
       (position) => {
         // alert("Please allow location access to see NA meetings near you.");
-        window.addEventListener("load", () => {
-          // Render Map
-          this.view.renderMap([16.4262746, 120.5967709]);
 
-          // Show all meetings marker
-          this.view.renderMarkers(this.model.meetings);
-        });
+        // Render Map
+        this.view.renderMap([16.4262746, 120.5967709]);
+
+        // Show all meetings marker
+        this.view.renderMarkers(this.model.meetings);
       }
     );
   }
