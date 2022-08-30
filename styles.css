@@ -1,0 +1,98 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: #fff;
+
+  flex-direction: column;
+  color: #e9ecef;
+}
+
+/* Header */
+.header {
+  margin-top: 2rem;
+}
+.header__logo {
+  height: 40px;
+  width: 40px;
+  margin-right: 10px;
+}
+
+.header__title {
+  font-size: 3rem;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  color: #1678bd;
+}
+
+.header__subtitle {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #868e96;
+}
+
+/* Form */
+.form-container {
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.form label {
+  color: #868e96;
+}
+
+.form select {
+  border-radius: 30px;
+  padding: 1rem;
+  outline: 0;
+  font-family: inherit;
+  color: #212529;
+  border: 1px solid #dee2e6;
+}
+
+/* Map */
+#map {
+  height: 80vh;
+  width: 90vw;
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+.leaflet-marker-icon {
+  transition: 0.3s;
+}
+
+.leaflet-popup-content p {
+  margin: 0;
+  margin-bottom: 1rem;
+}
+
+.meeting-title {
+  font-weight: bold;
+}
+
+.meeting-schedule {
+  font-weight: bold;
+  color: #0096ff;
+}
+
+.meeting-popup {
+  font-size: 1.2rem;
+}
