@@ -185,13 +185,11 @@ class View {
   }
 
   renderMap(coords) {
-    window.addEventListener("load", function () {
-      this.#map = L.map("map").setView(coords, 7);
-      L.tileLayer("https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png", {
-        attribution:
-          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-      }).addTo(this.#map);
-    });
+    this.#map = L.map("map").setView(coords, 7);
+    L.tileLayer("https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png", {
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(this.#map);
   }
 
   renderMarkers(meetings) {
@@ -248,19 +246,23 @@ class App {
         // Save coordinates
         this.model.coords = [latitude, longitude];
 
-        // Render Map
-        this.view.renderMap(this.model.coords);
+        window.addEventListener("load", () => {
+          // Render Map
+          this.view.renderMap(this.model.coords);
 
-        // Show all meetings marker
-        this.view.renderMarkers(this.model.meetings);
+          // Show all meetings marker
+          this.view.renderMarkers(this.model.meetings);
+        });
       },
       (position) => {
         // alert("Please allow location access to see NA meetings near you.");
-        // Render Map
-        this.view.renderMap([16.4262746, 120.5967709]);
+        window.addEventListener("load", () => {
+          // Render Map
+          this.view.renderMap([16.4262746, 120.5967709]);
 
-        // Show all meetings marker
-        this.view.renderMarkers(this.model.meetings);
+          // Show all meetings marker
+          this.view.renderMarkers(this.model.meetings);
+        });
       }
     );
   }
