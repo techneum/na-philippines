@@ -185,11 +185,13 @@ class View {
   }
 
   renderMap(coords) {
-    this.#map = L.map("map").setView(coords, 7);
-    L.tileLayer("https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png", {
-      attribution:
-        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    }).addTo(this.#map);
+    window.addEventListener("load", function () {
+      this.#map = L.map("map").setView(coords, 7);
+      L.tileLayer("https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png", {
+        attribution:
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      }).addTo(this.#map);
+    });
   }
 
   renderMarkers(meetings) {
