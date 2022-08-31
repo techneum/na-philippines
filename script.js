@@ -577,6 +577,9 @@ class App {
 
         // Show all meetings marker
         this.view.renderMarkers(this.model.meetings);
+
+        // Show number of active meetings
+        this.view.renderActiveMeetings(this.model.getActiveMeetings());
       }
     );
   }
