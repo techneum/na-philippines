@@ -384,16 +384,6 @@ class Model {
     {
       id: uuid.v4(),
       title: "Kidapwan",
-      days: ["Thursday, Saturday"],
-      schedule: "Thurs & Sat, 6:00 - 7:00 PM",
-      location: "Petron Saguing, Kidapwan City",
-      coords: [6.9851607, 125.0600684],
-      area: "Mindanao",
-      contact: "GSR Elizer A. 09702483483",
-    },
-    {
-      id: uuid.v4(),
-      title: "Kidapwan",
       days: [
         "Sunday",
         "Monday",
