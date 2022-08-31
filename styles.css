@@ -90,6 +90,10 @@ body {
   transition: 0.3s;
 }
 
+.leaflet-popup-content {
+  font-family: inherit;
+}
+
 .leaflet-popup-content p {
   margin: 0;
   margin-bottom: 1rem;
@@ -102,6 +106,14 @@ body {
 .meeting-schedule {
   font-weight: bold;
   color: #0096ff;
+}
+
+.meeting-location {
+  color: #343a40;
+}
+
+.meeting-contact {
+  color: #343a40;
 }
 
 .meeting-popup {

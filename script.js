@@ -376,7 +376,7 @@ class Model {
       title: "Kidapwan",
       days: ["Thursday"],
       schedule: "Thursdays, 6:00 - 7:00 PM",
-      location: "Petron,  ",
+      location: "Petron Saguing, Kidapwan City",
       coords: [6.9785639, 125.0788117],
       area: "Mindanao",
       contact: "GSR Elizer A. 09702483483",
@@ -513,6 +513,7 @@ class View {
         <p class="meeting-title">${meeting.title}</p>
         <p class="meeting-schedule">${meeting.schedule}</p>
         <p class="meeting-location">${meeting.location}</p>
+        <p class="meeting-contact">${meeting.contact || ""}</p>
         `
         )
         .on("click", (e) => this.moveToPopup(e, meeting));
