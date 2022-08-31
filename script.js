@@ -567,7 +567,7 @@ class App {
         this.view.renderMarkers(this.model.meetings);
 
         // Show number of active meetings
-        this.view.renderActiveMeetings(this.model.getActiveMeetings());
+        // this.view.renderActiveMeetings(this.model.getActiveMeetings());
       },
       (position) => {
         // alert("Please allow location access to see NA meetings near you.");
@@ -579,7 +579,7 @@ class App {
         this.view.renderMarkers(this.model.meetings);
 
         // Show number of active meetings
-        this.view.renderActiveMeetings(this.model.getActiveMeetings());
+        // this.view.renderActiveMeetings(this.model.getActiveMeetings());
       }
     );
   }
