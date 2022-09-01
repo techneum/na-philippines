@@ -120,7 +120,7 @@ class App {
         // alert("Please allow location access to see NA meetings near you.");
 
         // Render Map
-        this.view.renderMap([12.0258538, 117.896493]);
+        this.view.renderMap([12.689808, 123.108021]);
 
         // Render Meetings
         this.model
