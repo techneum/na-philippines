@@ -142,4 +142,6 @@ class App {
   };
 }
 
-const app = new App(new Model(), new View());
+window.addEventListener("load", () => {
+  const app = new App(new Model(), new View());
+});
