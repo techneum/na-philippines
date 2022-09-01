@@ -142,6 +142,6 @@ class App {
   };
 }
 
-window.addEventListener("load", () => {
+window.addEventListener("DOMContentLoaded", () => {
   const app = new App(new Model(), new View());
 });
