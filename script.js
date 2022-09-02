@@ -1,17 +1,9 @@
 // MODEL
 class Model {
-  #coords = [];
   #meetings = [];
 
-  set coords(coords) {
-    this.#coords = coords;
-  }
-
-  get coords() {
-    return this.#coords;
-  }
-
   async getMeetings() {
+    // Fetch meetings data
     const response = await fetch(
       "https://raw.githubusercontent.com/techneum/na-meetings/main/meetings.json"
     );
@@ -23,10 +15,6 @@ class Model {
   filterMeetings(day) {
     if (day === "All") return this.#meetings;
     return this.#meetings.filter((meeting) => meeting.days.includes(day));
-  }
-
-  getActiveMeetings() {
-    return this.#meetings.length;
   }
 }
 
@@ -40,6 +28,7 @@ class View {
   }
 
   renderMap(coords) {
+    // Initialize map
     this.#map = L.map("map").setView(coords, 6);
     L.tileLayer("https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png", {
       attribution:
@@ -48,9 +37,12 @@ class View {
   }
 
   renderMarkers(meetings) {
+    // Check if layer group exists. If so, clear it.
     if (this.#layerMarkers) {
       this.#layerMarkers.clearLayers();
     }
+
+    // Create new layer group
     this.#layerMarkers = L.layerGroup().addTo(this.#map);
 
     meetings.forEach((meeting) => {
@@ -81,53 +73,25 @@ class View {
     const zoom = this.#map.getZoom();
     this.#map.setView(meeting.coords, zoom);
   }
-
-  renderActiveMeetings(number) {
-    const header = document.querySelector(".header");
-    const html = `<p class="header__active-meetings">Active meetings: ${number}</p>`;
-    header.insertAdjacentHTML("beforeend", html);
-  }
 }
 
 // APP
 class App {
-  #coords;
-
   constructor(model, view) {
     this.model = model;
     this.view = view;
-    this.#getCurrentPosition();
+    this.#init();
     this.#setupEventListeners();
   }
 
-  #getCurrentPosition() {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const { latitude, longitude } = position.coords;
+  #init() {
+    // Render Map
+    this.view.renderMap([12.689808, 123.108021]);
 
-        // Save coordinates
-        this.model.coords = [latitude, longitude];
-
-        // Render Map
-        this.view.renderMap(this.model.coords);
-
-        // Render Meetings
-        this.model
-          .getMeetings()
-          .then((meetings) => this.view.renderMarkers(meetings));
-      },
-      (position) => {
-        // alert("Please allow location access to see NA meetings near you.");
-
-        // Render Map
-        this.view.renderMap([12.689808, 123.108021]);
-
-        // Render Meetings
-        this.model
-          .getMeetings()
-          .then((meetings) => this.view.renderMarkers(meetings));
-      }
-    );
+    // Render Meetings
+    this.model
+      .getMeetings()
+      .then((meetings) => this.view.renderMarkers(meetings));
   }
 
   #setupEventListeners() {
@@ -135,9 +99,13 @@ class App {
   }
 
   #handleForm = (e) => {
+    // Get day value from form
     const day = e.target.value;
+
+    // Filter meetings by day
     const meetings = this.model.filterMeetings(day);
 
+    // Render filtered markers
     this.view.renderMarkers(meetings);
   };
 }
