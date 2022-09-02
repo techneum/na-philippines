@@ -25,6 +25,7 @@ class View {
 
   constructor() {
     this.form = document.querySelector(".form");
+    this.info = document.querySelector(".total-meetings");
   }
 
   renderMap(coords) {
@@ -73,6 +74,12 @@ class View {
     const zoom = this.#map.getZoom();
     this.#map.setView(meeting.coords, zoom);
   }
+
+  renderTotalMeetings(number) {
+    this.info.innerHTML = "";
+    const html = `<p>Total Meetings: ${number}</p>`;
+    this.info.insertAdjacentHTML("afterbegin", html);
+  }
 }
 
 // APP
@@ -84,14 +91,18 @@ class App {
     this.#setupEventListeners();
   }
 
-  #init() {
-    // Render Map
+  async #init() {
+    // Render Map on Default Coordinates
     this.view.renderMap([12.689808, 123.108021]);
 
-    // Render Meetings
-    this.model
-      .getMeetings()
-      .then((meetings) => this.view.renderMarkers(meetings));
+    // Get meetings from github
+    const meetings = await this.model.getMeetings();
+
+    // Render Markers
+    this.view.renderMarkers(meetings);
+
+    // Render Active Meetings Number
+    this.view.renderTotalMeetings(meetings.length);
   }
 
   #setupEventListeners() {
@@ -107,6 +118,9 @@ class App {
 
     // Render filtered markers
     this.view.renderMarkers(meetings);
+
+    // Render Total Meetings
+    this.view.renderTotalMeetings(meetings.length);
   };
 }
 
