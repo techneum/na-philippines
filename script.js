@@ -8,7 +8,8 @@ class Model {
       "https://raw.githubusercontent.com/techneum/na-meetings/main/meetings.json"
     );
     const data = await response.json();
-    this.#meetings = data;
+
+    this.#meetings = data[0];
     return this.#meetings;
   }
 
