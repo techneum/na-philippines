@@ -35,7 +35,8 @@ class View {
 
   constructor() {
     this.form = document.querySelector(".form");
-    this.info = document.querySelector(".total-meetings");
+    this.totalMeetings = document.querySelector(".total-meetings");
+    this.info = document.querySelector(".info");
   }
 
   renderMap(coords) {
@@ -86,12 +87,13 @@ class View {
   }
 
   renderTotalMeetings(number) {
-    this.info.innerHTML = "";
+    this.totalMeetings.innerHTML = "";
     const html = `<p>Total Meetings: ${number}</p>`;
-    this.info.insertAdjacentHTML("afterbegin", html);
+    this.totalMeetings.insertAdjacentHTML("afterbegin", html);
   }
 
   renderLastUpdated(date) {
+    this.info.innerHTML = "";
     const html = `<p>Last updated: ${date}</p>`;
     this.info.insertAdjacentHTML("beforeend", html);
   }
