@@ -1,21 +1,30 @@
 // MODEL
 class Model {
   #meetings = [];
+  #lastUpdated;
 
-  async getMeetings() {
+  async fetchData() {
     // Fetch meetings data
     const response = await fetch(
       "https://raw.githubusercontent.com/techneum/na-meetings/main/meetings.json"
     );
-    const data = await response.json();
 
-    this.#meetings = data[0];
-    return this.#meetings;
+    const data = await response.json();
+    this.#meetings = data.meetings;
+    this.#lastUpdated = data.lastUpdated;
   }
 
   filterMeetings(day) {
     if (day === "All") return this.#meetings;
     return this.#meetings.filter((meeting) => meeting.days.includes(day));
+  }
+
+  getMeetings() {
+    return this.#meetings;
+  }
+
+  getLastUpdated() {
+    return this.#lastUpdated;
   }
 }
 
@@ -81,6 +90,11 @@ class View {
     const html = `<p>Total Meetings: ${number}</p>`;
     this.info.insertAdjacentHTML("afterbegin", html);
   }
+
+  renderLastUpdated(date) {
+    const html = `<p>Last updated: ${date}</p>`;
+    this.info.insertAdjacentHTML("beforeend", html);
+  }
 }
 
 // APP
@@ -96,14 +110,20 @@ class App {
     // Render Map on Default Coordinates
     this.view.renderMap([12.689808, 123.108021]);
 
-    // Get meetings from github
-    const meetings = await this.model.getMeetings();
+    // Fetch data from github
+    await this.model.fetchData();
+
+    // Get meetings data from model
+    const meetings = this.model.getMeetings();
 
     // Render Markers
     this.view.renderMarkers(meetings);
 
     // Render Active Meetings Number
     this.view.renderTotalMeetings(meetings.length);
+
+    // Render Last updated
+    this.view.renderLastUpdated(this.model.getLastUpdated());
   }
 
   #setupEventListeners() {
